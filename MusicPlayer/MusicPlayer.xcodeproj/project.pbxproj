@@ -66,6 +66,8 @@
 		24806FA81BE551E20008DF43 /* NSObject+MJMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806F9F1BE551E20008DF43 /* NSObject+MJMember.m */; settings = {ASSET_TAGS = (); }; };
 		24806FAD1BE553EF0008DF43 /* UIImage+Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FAA1BE553EF0008DF43 /* UIImage+Circle.m */; settings = {ASSET_TAGS = (); }; };
 		24806FAE1BE553EF0008DF43 /* UIView+AdjustFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FAC1BE553EF0008DF43 /* UIView+AdjustFrame.m */; settings = {ASSET_TAGS = (); }; };
+		24806FB11BE559C30008DF43 /* TSZAudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FB01BE559C30008DF43 /* TSZAudioTool.m */; settings = {ASSET_TAGS = (); }; };
+		24806FB41BE5A8090008DF43 /* TSZMusicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FB31BE5A8090008DF43 /* TSZMusicTool.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,6 +147,10 @@
 		24806FAA1BE553EF0008DF43 /* UIImage+Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Circle.m"; sourceTree = "<group>"; };
 		24806FAB1BE553EF0008DF43 /* UIView+AdjustFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AdjustFrame.h"; sourceTree = "<group>"; };
 		24806FAC1BE553EF0008DF43 /* UIView+AdjustFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AdjustFrame.m"; sourceTree = "<group>"; };
+		24806FAF1BE559C30008DF43 /* TSZAudioTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSZAudioTool.h; sourceTree = "<group>"; };
+		24806FB01BE559C30008DF43 /* TSZAudioTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZAudioTool.m; sourceTree = "<group>"; };
+		24806FB21BE5A8090008DF43 /* TSZMusicTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSZMusicTool.h; sourceTree = "<group>"; };
+		24806FB31BE5A8090008DF43 /* TSZMusicTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZMusicTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +335,10 @@
 		24806F841BE518390008DF43 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				24806FAF1BE559C30008DF43 /* TSZAudioTool.h */,
+				24806FB01BE559C30008DF43 /* TSZAudioTool.m */,
+				24806FB21BE5A8090008DF43 /* TSZMusicTool.h */,
+				24806FB31BE5A8090008DF43 /* TSZMusicTool.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -483,6 +493,7 @@
 				24806FA11BE551E20008DF43 /* MJIvar.m in Sources */,
 				24806FAD1BE553EF0008DF43 /* UIImage+Circle.m in Sources */,
 				24806FA41BE551E20008DF43 /* MJType.m in Sources */,
+				24806FB41BE5A8090008DF43 /* TSZMusicTool.m in Sources */,
 				24806F861BE518390008DF43 /* TSZTableViewController.m in Sources */,
 				24806FA01BE551E20008DF43 /* MJArgument.m in Sources */,
 				24806FA71BE551E20008DF43 /* NSObject+MJKeyValue.m in Sources */,
@@ -490,6 +501,7 @@
 				24806FA51BE551E20008DF43 /* MJTypeEncoding.m in Sources */,
 				24806FA61BE551E20008DF43 /* NSObject+MJCoding.m in Sources */,
 				24806FA21BE551E20008DF43 /* MJMember.m in Sources */,
+				24806FB11BE559C30008DF43 /* TSZAudioTool.m in Sources */,
 				24806FA31BE551E20008DF43 /* MJMethod.m in Sources */,
 				24806FAE1BE553EF0008DF43 /* UIView+AdjustFrame.m in Sources */,
 				24806F871BE518390008DF43 /* AppDelegate.m in Sources */,

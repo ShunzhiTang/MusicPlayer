@@ -11,13 +11,21 @@
 #import "TSZMusicTool.h"
 #import <AVFoundation/AVFoundation.h>
 #import "TSZAudioTool.h"
-@interface TSZPlayingMusicViewController ()
+@interface TSZPlayingMusicViewController ()<AVAudioPlayerDelegate>
 
 //记录播放的音乐
 @property (nonatomic , strong)TSZMusics *playingMusic;
 
 //播放器
 @property (nonatomic ,strong)AVAudioPlayer *player;
+
+//进度的定时器
+@property (nonatomic ,strong)NSTimer  *progressTimer;
+
+//进度条滑动
+- (IBAction)tapProgressBackground:(UITapGestureRecognizer *)sender;
+
+- (IBAction)panSliderButton:(UIPanGestureRecognizer *)sender;
 
 //音乐的label
 @property (weak, nonatomic) IBOutlet UILabel *songLabel;
@@ -41,14 +49,17 @@
 //暂定 播放
 @property (weak, nonatomic) IBOutlet UIButton *playOrPauseButton;
 
-//
-
 @end
 
 @implementation TSZPlayingMusicViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //剪裁显示时间的label
+//    self.showTimeLabel.clipsToBounds = YES;
+    self.showTimeLabel.layer.cornerRadius = 5.0;
+    self.showTimeLabel.layer.masksToBounds = YES;
     
 }
 
@@ -77,7 +88,6 @@
     //3、将自身添加到window上
     [window addSubview:self.view];
     
-    
     //4、设置动画效果
     self.view.y = self.view.height;
     
@@ -96,7 +106,7 @@
     //1、拿到正在播放的音乐
     TSZMusics *playingMusic = [TSZMusicTool playingMusic];
     if(playingMusic == self.playingMusic){
-        
+        [self addProgressTimer];
         return;
     }
     
@@ -114,10 +124,48 @@
     self.player = [TSZAudioTool playMusicWithName:playingMusic.filename];
     //秒数 duration 播放器
     self.totalTimeLabel.text = [self stringWithTime:self.player.duration];
+    //遵守代理
+    self.player.delegate = self;
     
-    //4、改变按钮的状态
+    
+    //4、添加定时器
+    [self addProgressTimer];
+    [self updateInfo];
+    //5、改变按钮的状态
     self.playOrPauseButton.selected = NO;
 }
+
+#pragma mark 对定时器的操作
+
+//添加进度条的定时器
+- (void)addProgressTimer{
+    self.progressTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateInfo) userInfo:nil repeats:YES];
+    //加入运行循环
+    [[NSRunLoop mainRunLoop] addTimer:self.progressTimer forMode:NSRunLoopCommonModes];
+}
+
+/**
+ * 移除定时器
+ */
+- (void)removeProgressTimer{
+    [self.progressTimer invalidate];
+    self.progressTimer = nil;
+}
+
+#pragma mark 更新进度条
+
+- (void)updateInfo{
+    //1、更新播放比例
+    CGFloat progressRatio = self.player.currentTime / self.player.duration;
+    
+    //2、更新滑块的位置
+    self.sliderLeftConstraint.constant = progressRatio * (self.view.width - self.sliderButton.width);
+    //3、更新滑块的文字
+    NSString *currentTimerStr = [self stringWithTime:self.player.currentTime];
+    [self.sliderButton setTitle:currentTimerStr forState:UIControlStateNormal];
+    
+}
+
 
 #pragma mark  停止播放音乐
 - (void)stopPlayingMusic{
@@ -144,6 +192,9 @@
         self.view.y = self.view.height;
     } completion:^(BOOL finished) {
         window.userInteractionEnabled = YES;
+        
+        //移除定时器
+        [self removeProgressTimer];
     }];
 }
 
@@ -177,7 +228,7 @@
     
 }
 
-#pragma mark 把纳秒 转化为固定的格式
+#pragma mark 把秒 转化为固定的格式
 - (NSString *)stringWithTime:(NSTimeInterval)time {
     NSInteger minute = time / 60;
     NSInteger second = (NSInteger)time % 60;
@@ -185,4 +236,62 @@
 }
 
 
+- (IBAction)tapProgressBackground:(UITapGestureRecognizer *)sender {
+    
+    //1、获取用户点击位置
+    CGPoint point = [sender locationInView:sender.view];
+    
+    //2、改变silderB的约束
+    if (point.x <= self.sliderButton.width *0.5) {
+        self.sliderLeftConstraint.constant = 0;
+    }else if(point.x >= self.view.width - self.sliderButton.width * 0.5){
+        self.sliderLeftConstraint.constant = self.view.width - self.sliderButton.width -1;
+    }else{
+        self.sliderLeftConstraint.constant = point.x - self.sliderButton.width * 0.5;
+    }
+    //3、改变当前播放的时间
+    CGFloat progressRatio = self.sliderLeftConstraint.constant / (self.view.width - self.sliderButton.width);
+    CGFloat currentTime = progressRatio * self.player.duration;
+    
+    self.player.currentTime = currentTime;
+    
+    //更新文字
+    [self updateInfo];
+    
+}
+
+- (IBAction)panSliderButton:(UIPanGestureRecognizer *)sender {
+    
+    //1、获取用户点击位置
+    CGPoint point = [sender locationInView:sender.view];
+    
+    //2、改变button 的约束
+    if (point.x <= self.sliderButton.width * 0.5){
+        self.sliderLeftConstraint.constant = 0;
+    }else if(point.x >= self.view.width - self.sliderButton.width){
+        self.sliderLeftConstraint.constant = self.sliderButton.width;
+    }else {
+        self.sliderLeftConstraint.constant = point.x - self.sliderButton.width * 0.5;
+    }
+}
+
+#pragma mark  AVAuidoPlayer的代理方法
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    if (flag) {
+        [self nextSong];
+    }
+}
+
+
+//音乐打断开始
+- (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player{
+    [self playOrPauseButton];
+}
+
+//打断结束
+
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player{
+    [self playOrPauseButton];
+}
 @end

@@ -74,23 +74,31 @@
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="5" id="7TM-Cy-11G"/>
                                 <constraint firstItem="mAK-Rw-Ydc" firstAttribute="leading" secondItem="GCF-ng-igC" secondAttribute="leading" id="IVp-Ta-PXD"/>
                                 <constraint firstAttribute="bottom" secondItem="mAK-Rw-Ydc" secondAttribute="bottom" id="rJS-uT-FuL"/>
                                 <constraint firstItem="mAK-Rw-Ydc" firstAttribute="top" secondItem="GCF-ng-igC" secondAttribute="top" id="swb-Si-6PB"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="kf4-f4-lri" appends="YES" id="2dY-bz-x23"/>
+                            </connections>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z4-sQ-hQd" userLabel="拖动按钮">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z4-sQ-hQd" userLabel="拖动按钮">
                             <rect key="frame" x="0.0" y="58" width="41" height="21"/>
+                            <gestureRecognizers/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="41" id="HIg-iz-pOr"/>
                                 <constraint firstAttribute="height" constant="21" id="z1G-5u-Qfv"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <state key="normal" title="00:00" backgroundImage="process_thumb">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="zbx-Rd-diV" appends="YES" id="ORO-KI-xET"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgV-zV-i6k" userLabel="播放按钮">
                             <rect key="frame" x="260" y="77" width="80" height="80"/>
@@ -197,6 +205,16 @@
                 </mask>
             </variation>
         </view>
+        <tapGestureRecognizer id="kf4-f4-lri">
+            <connections>
+                <action selector="tapProgressBackground:" destination="-1" id="apD-W0-glt"/>
+            </connections>
+        </tapGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="zbx-Rd-diV">
+            <connections>
+                <action selector="panSliderButton:" destination="-1" id="nOv-3U-fQN"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
     <resources>
         <image name="lyric_normal" width="41" height="48"/>

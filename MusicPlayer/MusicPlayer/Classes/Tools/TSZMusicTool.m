@@ -22,7 +22,6 @@ static TSZMusics *_playingMusic;
     _musics = [TSZMusics objectArrayWithFilename:@"Musics.plist"];
 }
 
-
 #pragma mark 实现定义的tools方法
 //获取数据
 + (NSArray *)musics{
@@ -65,6 +64,7 @@ static TSZMusics *_playingMusic;
     //1、获取当前正在播放的音乐
     NSInteger currentIdex = [_musics indexOfObject:_playingMusic];
     
+    currentIdex--;
     //2、判断是否越界
     if (currentIdex < 0) {
         currentIdex = _musics.count -1;

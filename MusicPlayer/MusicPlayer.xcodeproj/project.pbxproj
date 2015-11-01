@@ -68,6 +68,8 @@
 		24806FAE1BE553EF0008DF43 /* UIView+AdjustFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FAC1BE553EF0008DF43 /* UIView+AdjustFrame.m */; settings = {ASSET_TAGS = (); }; };
 		24806FB11BE559C30008DF43 /* TSZAudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FB01BE559C30008DF43 /* TSZAudioTool.m */; settings = {ASSET_TAGS = (); }; };
 		24806FB41BE5A8090008DF43 /* TSZMusicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FB31BE5A8090008DF43 /* TSZMusicTool.m */; settings = {ASSET_TAGS = (); }; };
+		24806FB81BE5AEC90008DF43 /* TSZPlayingMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24806FB61BE5AEC90008DF43 /* TSZPlayingMusicViewController.m */; settings = {ASSET_TAGS = (); }; };
+		24806FB91BE5AEC90008DF43 /* TSZPlayingMusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24806FB71BE5AEC90008DF43 /* TSZPlayingMusicViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +153,9 @@
 		24806FB01BE559C30008DF43 /* TSZAudioTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZAudioTool.m; sourceTree = "<group>"; };
 		24806FB21BE5A8090008DF43 /* TSZMusicTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSZMusicTool.h; sourceTree = "<group>"; };
 		24806FB31BE5A8090008DF43 /* TSZMusicTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZMusicTool.m; sourceTree = "<group>"; };
+		24806FB51BE5AEC90008DF43 /* TSZPlayingMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSZPlayingMusicViewController.h; sourceTree = "<group>"; };
+		24806FB61BE5AEC90008DF43 /* TSZPlayingMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZPlayingMusicViewController.m; sourceTree = "<group>"; };
+		24806FB71BE5AEC90008DF43 /* TSZPlayingMusicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSZPlayingMusicViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +293,9 @@
 			children = (
 				24806F7B1BE518390008DF43 /* TSZTableViewController.h */,
 				24806F7C1BE518390008DF43 /* TSZTableViewController.m */,
+				24806FB51BE5AEC90008DF43 /* TSZPlayingMusicViewController.h */,
+				24806FB61BE5AEC90008DF43 /* TSZPlayingMusicViewController.m */,
+				24806FB71BE5AEC90008DF43 /* TSZPlayingMusicViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -462,6 +470,7 @@
 				24806F5A1BE516FC0008DF43 /* kzxd@2x.jpg in Resources */,
 				24806F5D1BE516FC0008DF43 /* lkq_icon@2x.jpg in Resources */,
 				24806F741BE516FC0008DF43 /* 235319.mp3 in Resources */,
+				24806FB91BE5AEC90008DF43 /* TSZPlayingMusicViewController.xib in Resources */,
 				24806F671BE516FC0008DF43 /* 12309111.lrc in Resources */,
 				24806F581BE516FC0008DF43 /* jj@2x.jpg in Resources */,
 				24806F621BE516FC0008DF43 /* zxy@2x.jpg in Resources */,
@@ -493,6 +502,7 @@
 				24806FA11BE551E20008DF43 /* MJIvar.m in Sources */,
 				24806FAD1BE553EF0008DF43 /* UIImage+Circle.m in Sources */,
 				24806FA41BE551E20008DF43 /* MJType.m in Sources */,
+				24806FB81BE5AEC90008DF43 /* TSZPlayingMusicViewController.m in Sources */,
 				24806FB41BE5A8090008DF43 /* TSZMusicTool.m in Sources */,
 				24806F861BE518390008DF43 /* TSZTableViewController.m in Sources */,
 				24806FA01BE551E20008DF43 /* MJArgument.m in Sources */,

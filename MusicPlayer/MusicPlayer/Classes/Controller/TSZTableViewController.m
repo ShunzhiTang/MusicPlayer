@@ -8,12 +8,14 @@
 #import "MJExtension.h"
 #import "TSZMusics.h"
 #import "UIImage+Circle.h"
-
-
+#import "TSZMusicTool.h"
+#import "TSZAudioTool.h"
+#import "TSZPlayingMusicViewController.h"
 @interface TSZTableViewController ()
 
-//声明一个 全局属性
-@property (nonatomic , strong)NSArray *music;
+//跳转的控制器
+@property (nonatomic , strong)TSZPlayingMusicViewController *plaingVc;
+
 @end
 
 @implementation TSZTableViewController
@@ -27,13 +29,12 @@
     
 }
 
-//数组懒加载
-- (NSArray *)music {
-    
-    if (_music == nil) {
-        self.music = [TSZMusics objectArrayWithFilename:@"Musics.plist"];
+#pragma mark 懒加载控制器
+-(TSZPlayingMusicViewController *)plaingVc{
+    if (_plaingVc == nil) {
+        _plaingVc = [[TSZPlayingMusicViewController alloc]init];
     }
-    return _music;
+    return  _plaingVc;
 }
 
 
@@ -44,10 +45,17 @@
     
     //取消cell的选中状态
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    //得到整个数组
+    TSZMusics *music = [TSZMusicTool musics][indexPath.row];
+    [TSZMusicTool setPlayingMusic:music];
+    
+    //弹出这个控制器
+    [self.plaingVc show];
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.music.count;
+    return [TSZMusicTool musics].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -60,7 +68,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
-    TSZMusics *music = self.music[indexPath.row];
+    TSZMusics *music = [TSZMusicTool musics][indexPath.row];
     
     cell.imageView.image = [UIImage circleImageWithName:music.singerIcon borderWidth:5 borderColor:[UIColor orangeColor]];
     cell.textLabel.text = music.name;

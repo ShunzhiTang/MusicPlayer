@@ -11,6 +11,8 @@
 #import "TSZMusicTool.h"
 #import <AVFoundation/AVFoundation.h>
 #import "TSZAudioTool.h"
+
+
 @interface TSZPlayingMusicViewController ()<AVAudioPlayerDelegate>
 
 //记录播放的音乐
@@ -49,6 +51,15 @@
 //暂定 播放
 @property (weak, nonatomic) IBOutlet UIButton *playOrPauseButton;
 
+// 歌词的  view
+@property (weak, nonatomic) IBOutlet UIView *lyricsView;
+
+//点击显示歌词
+
+- (IBAction)lyricsClickButton:(UIButton *)sender;
+
+
+
 @end
 
 @implementation TSZPlayingMusicViewController
@@ -60,7 +71,6 @@
 //    self.showTimeLabel.clipsToBounds = YES;
     self.showTimeLabel.layer.cornerRadius = 5.0;
     self.showTimeLabel.layer.masksToBounds = YES;
-    
 }
 
 #pragma mark: 对控制器进行操作
@@ -111,6 +121,7 @@
     }
     
     self.playingMusic = playingMusic;
+    
     //2、设置界面基本信息
     self.songLabel.text = playingMusic.name;
     
@@ -163,9 +174,7 @@
     //3、更新滑块的文字
     NSString *currentTimerStr = [self stringWithTime:self.player.currentTime];
     [self.sliderButton setTitle:currentTimerStr forState:UIControlStateNormal];
-    
 }
-
 
 #pragma mark  停止播放音乐
 - (void)stopPlayingMusic{
@@ -257,7 +266,6 @@
     
     //更新文字
     [self updateInfo];
-    
 }
 
 - (IBAction)panSliderButton:(UIPanGestureRecognizer *)sender {
@@ -273,6 +281,7 @@
     }else {
         self.sliderLeftConstraint.constant = point.x - self.sliderButton.width * 0.5;
     }
+    
 }
 
 #pragma mark  AVAuidoPlayer的代理方法
@@ -283,7 +292,6 @@
     }
 }
 
-
 //音乐打断开始
 - (void)audioPlayerBeginInterruption:(AVAudioPlayer *)player{
     [self playOrPauseButton];
@@ -293,5 +301,14 @@
 
 - (void)audioPlayerEndInterruption:(AVAudioPlayer *)player{
     [self playOrPauseButton];
+}
+
+#pragma mark 点击显示歌词
+
+- (IBAction)lyricsClickButton:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    
+    
+    
 }
 @end

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2477D3991BE6C09900FF0034 /* TSZLyricsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2477D3981BE6C09900FF0034 /* TSZLyricsView.m */; settings = {ASSET_TAGS = (); }; };
+		2477D39F1BE6C11500FF0034 /* DRNRealTimeBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2477D39C1BE6C11500FF0034 /* DRNRealTimeBlurView.m */; settings = {ASSET_TAGS = (); }; };
+		2477D3A01BE6C11500FF0034 /* UIImage+BoxBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 2477D39E1BE6C11500FF0034 /* UIImage+BoxBlur.m */; settings = {ASSET_TAGS = (); }; };
+		2477D3A31BE7005000FF0034 /* TSZLrcCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2477D3A21BE7005000FF0034 /* TSZLrcCell.m */; settings = {ASSET_TAGS = (); }; };
+		2477D3A61BE7009400FF0034 /* TSZLyricsLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 2477D3A51BE7009400FF0034 /* TSZLyricsLine.m */; settings = {ASSET_TAGS = (); }; };
 		24806F171BE511300008DF43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24806F151BE511300008DF43 /* Main.storyboard */; };
 		24806F191BE511300008DF43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24806F181BE511300008DF43 /* Assets.xcassets */; };
 		24806F1C1BE511300008DF43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24806F1A1BE511300008DF43 /* LaunchScreen.storyboard */; };
@@ -73,6 +78,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2477D3971BE6C09900FF0034 /* TSZLyricsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSZLyricsView.h; sourceTree = "<group>"; };
+		2477D3981BE6C09900FF0034 /* TSZLyricsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZLyricsView.m; sourceTree = "<group>"; };
+		2477D39B1BE6C11500FF0034 /* DRNRealTimeBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRNRealTimeBlurView.h; sourceTree = "<group>"; };
+		2477D39C1BE6C11500FF0034 /* DRNRealTimeBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRNRealTimeBlurView.m; sourceTree = "<group>"; };
+		2477D39D1BE6C11500FF0034 /* UIImage+BoxBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BoxBlur.h"; sourceTree = "<group>"; };
+		2477D39E1BE6C11500FF0034 /* UIImage+BoxBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BoxBlur.m"; sourceTree = "<group>"; };
+		2477D3A11BE7005000FF0034 /* TSZLrcCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSZLrcCell.h; sourceTree = "<group>"; };
+		2477D3A21BE7005000FF0034 /* TSZLrcCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZLrcCell.m; sourceTree = "<group>"; };
+		2477D3A41BE7009400FF0034 /* TSZLyricsLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSZLyricsLine.h; sourceTree = "<group>"; };
+		2477D3A51BE7009400FF0034 /* TSZLyricsLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSZLyricsLine.m; sourceTree = "<group>"; };
 		24806F091BE511300008DF43 /* MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24806F161BE511300008DF43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		24806F181BE511300008DF43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -169,6 +184,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2477D39A1BE6C11500FF0034 /* DRNRealTimeBlur */ = {
+			isa = PBXGroup;
+			children = (
+				2477D39B1BE6C11500FF0034 /* DRNRealTimeBlurView.h */,
+				2477D39C1BE6C11500FF0034 /* DRNRealTimeBlurView.m */,
+				2477D39D1BE6C11500FF0034 /* UIImage+BoxBlur.h */,
+				2477D39E1BE6C11500FF0034 /* UIImage+BoxBlur.m */,
+			);
+			path = DRNRealTimeBlur;
+			sourceTree = "<group>";
+		};
 		24806F001BE5112F0008DF43 = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +331,8 @@
 			children = (
 				24806F891BE550040008DF43 /* TSZMusics.h */,
 				24806F8A1BE550040008DF43 /* TSZMusics.m */,
+				2477D3A41BE7009400FF0034 /* TSZLyricsLine.h */,
+				2477D3A51BE7009400FF0034 /* TSZLyricsLine.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,6 +363,7 @@
 		24806F821BE518390008DF43 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				2477D39A1BE6C11500FF0034 /* DRNRealTimeBlur */,
 				24806F8C1BE551E20008DF43 /* MJExtension */,
 			);
 			path = Lib;
@@ -356,6 +385,10 @@
 			children = (
 				24806F151BE511300008DF43 /* Main.storyboard */,
 				24806F1A1BE511300008DF43 /* LaunchScreen.storyboard */,
+				2477D3971BE6C09900FF0034 /* TSZLyricsView.h */,
+				2477D3981BE6C09900FF0034 /* TSZLyricsView.m */,
+				2477D3A11BE7005000FF0034 /* TSZLrcCell.h */,
+				2477D3A21BE7005000FF0034 /* TSZLrcCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -501,14 +534,19 @@
 			files = (
 				24806FA11BE551E20008DF43 /* MJIvar.m in Sources */,
 				24806FAD1BE553EF0008DF43 /* UIImage+Circle.m in Sources */,
+				2477D3991BE6C09900FF0034 /* TSZLyricsView.m in Sources */,
 				24806FA41BE551E20008DF43 /* MJType.m in Sources */,
 				24806FB81BE5AEC90008DF43 /* TSZPlayingMusicViewController.m in Sources */,
+				2477D3A61BE7009400FF0034 /* TSZLyricsLine.m in Sources */,
 				24806FB41BE5A8090008DF43 /* TSZMusicTool.m in Sources */,
 				24806F861BE518390008DF43 /* TSZTableViewController.m in Sources */,
 				24806FA01BE551E20008DF43 /* MJArgument.m in Sources */,
 				24806FA71BE551E20008DF43 /* NSObject+MJKeyValue.m in Sources */,
 				24806F881BE518390008DF43 /* main.m in Sources */,
 				24806FA51BE551E20008DF43 /* MJTypeEncoding.m in Sources */,
+				2477D39F1BE6C11500FF0034 /* DRNRealTimeBlurView.m in Sources */,
+				2477D3A01BE6C11500FF0034 /* UIImage+BoxBlur.m in Sources */,
+				2477D3A31BE7005000FF0034 /* TSZLrcCell.m in Sources */,
 				24806FA61BE551E20008DF43 /* NSObject+MJCoding.m in Sources */,
 				24806FA21BE551E20008DF43 /* MJMember.m in Sources */,
 				24806FB11BE559C30008DF43 /* TSZAudioTool.m in Sources */,

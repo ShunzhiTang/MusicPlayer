@@ -12,8 +12,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "TSZAudioTool.h"
 #import "TSZLyricsView.h"
-
-@interface TSZPlayingMusicViewController ()<AVAudioPlayerDelegate>
+#import <MediaPlayer/MediaPlayer.h>
+@interface TSZPlayingMusicViewController ()<AVAudioPlayerDelegate,AVAudioSessionDelegate>
 
 //记录播放的音乐
 @property (nonatomic , strong)TSZMusics *playingMusic;
@@ -120,6 +120,7 @@
     TSZMusics *playingMusic = [TSZMusicTool playingMusic];
     if(playingMusic == self.playingMusic){
         [self addProgressTimer];
+        [self addLrcTimer];
         return;
     }
     
@@ -151,6 +152,9 @@
     
     //5、改变按钮的状态
     self.playOrPauseButton.selected = NO;
+    
+    //6、锁屏实现 开启信息
+    [self updateLockInfo];
 }
 
 #pragma mark 对定时器的操作
@@ -394,5 +398,67 @@
         [self addLrcTimer];
     }
 }
+
+
+#pragma mark:显示锁屏 信息
+- (void)updateLockInfo{
+    //1、获取当前的播放信息中心
+    MPNowPlayingInfoCenter *center = [MPNowPlayingInfoCenter defaultCenter];
+    
+    //2、设置显示信息
+    NSMutableDictionary * infos = [NSMutableDictionary dictionary];
+    
+    //2.1、歌曲的名称
+    infos[MPMediaItemPropertyAlbumTitle] = self.playingMusic.name;
+    
+    //2.2、设置歌手的名称
+    infos[MPMediaItemPropertyAlbumArtist] = self.playingMusic.singer;
+    
+    //2.3 、设置歌曲封面
+    infos[MPMediaItemPropertyArtwork] = [[MPMediaItemArtwork alloc] initWithImage:[UIImage imageNamed:self.playingMusic.icon]];
+    
+    //2.4、设置歌曲总时长
+    infos[MPMediaItemPropertyPlaybackDuration] = @(self.player.duration);
+    
+    //2.5、设置当前播放时间
+    infos[MPNowPlayingInfoPropertyElapsedPlaybackTime] = @(self.player.currentTime);
+    
+    //赋值
+    [center setNowPlayingInfo:infos];
+    
+    
+    //3、 开启监听远程事件
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
+    //4、成为第一响应者
+    [self becomeFirstResponder];
+    
+}
+
+- (BOOL)canBecomeFirstResponder{
+    return  YES;
+}
+
+#pragma mark 点击功能键可以实现  对应的功能
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event{
+    switch (event.subtype) {
+        case UIEventSubtypeRemoteControlPlay:
+        case UIEventSubtypeRemoteControlPause:
+            //播放暂停
+            [self playOrPauseButton];
+            break;
+        case UIEventSubtypeRemoteControlNextTrack:
+            //下一首
+            [self nextSong];
+            break;
+        case UIEventSubtypeRemoteControlPreviousTrack:
+            //前一首
+            [self prefixSong];
+            break;
+        default:
+            break;
+    }
+}
+
 
 @end

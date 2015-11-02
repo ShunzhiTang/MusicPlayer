@@ -26,6 +26,10 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_cover_pic_bg" translatesAutoresizingMaskIntoConstraints="NO" id="5gs-FH-aXO" userLabel="背景图片">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="440"/>
                 </imageView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOV-eG-WuQ" userLabel="歌词的view" customClass="TSZLyricsView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="440"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftD-Jx-fes" userLabel="退出按钮">
                     <rect key="frame" x="20" y="20" width="41" height="48"/>
                     <constraints>
@@ -187,10 +191,6 @@
                             <exclude reference="f7r-NS-i3v"/>
                         </mask>
                     </variation>
-                </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOV-eG-WuQ" userLabel="歌词的view" customClass="TSZLyricsView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="440"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <constraints>

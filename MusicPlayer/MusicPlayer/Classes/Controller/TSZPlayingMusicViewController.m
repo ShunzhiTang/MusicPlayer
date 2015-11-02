@@ -269,10 +269,14 @@
     
     if (self.player.playing) {
         [self.player pause];
+        [self removeProgressTimer];
+        [self removeLrcTimer];
+        
     }else{
         [self.player play];
+        [self addProgressTimer];
+        [self addLrcTimer];
     }
-    
 }
 
 #pragma mark 把秒 转化为固定的格式
@@ -282,14 +286,13 @@
     return [NSString stringWithFormat:@"%02ld:%02ld", minute, second];
 }
 
-
 - (IBAction)tapProgressBackground:(UITapGestureRecognizer *)sender {
     
     //1、获取用户点击位置
     CGPoint point = [sender locationInView:sender.view];
     
     //2、改变silderB的约束
-    if (point.x <= self.sliderButton.width *0.5) {
+    if (point.x <= self.sliderButton.width * 0.5) {
         self.sliderLeftConstraint.constant = 0;
     }else if(point.x >= self.view.width - self.sliderButton.width * 0.5){
         self.sliderLeftConstraint.constant = self.view.width - self.sliderButton.width -1;
@@ -311,15 +314,52 @@
     //1、获取用户点击位置
     CGPoint point = [sender locationInView:sender.view];
     
+    [sender setTranslation:CGPointZero inView:sender.view];
+    
     //2、改变button 的约束
-    if (point.x <= self.sliderButton.width * 0.5){
+    if (self.sliderLeftConstraint.constant + point.x <= 0){
+        
         self.sliderLeftConstraint.constant = 0;
-    }else if(point.x >= self.view.width - self.sliderButton.width){
-        self.sliderLeftConstraint.constant = self.sliderButton.width;
+        
+    }else if(self.sliderLeftConstraint.constant +  point.x >= self.view.width - self.sliderButton.width * 0.5){
+        self.sliderLeftConstraint.constant = self.view.width -  self.sliderButton.width -1 ;
+        
     }else {
-        self.sliderLeftConstraint.constant = point.x - self.sliderButton.width * 0.5;
+        
+        self.sliderLeftConstraint.constant += point.x;
     }
     
+    //3、获取拖拽进度对应的 播放时间
+    CGFloat progressRatio = self.sliderLeftConstraint.constant / (self.view.width - self.sliderButton.width);
+    CGFloat currentTime = progressRatio * self.player.duration;
+    
+    //4、更新文字
+    NSString *currentTimeStr = [self stringWithTime:currentTime];
+    
+    [self.sliderButton setTitle:currentTimeStr forState:UIControlStateNormal];
+    
+    self.showTimeLabel.text = currentTimeStr;
+    
+    
+    //监听拖拽手势
+    
+    if (sender.state  == UIGestureRecognizerStateBegan){
+        
+        // 移除 定时器
+        [self removeProgressTimer];
+        
+        self.showTimeLabel.hidden = NO;
+        
+    }else if(sender.state == UIGestureRecognizerStateEnded){
+        
+        //更新播放器时间
+        self.player.currentTime = currentTime;
+        
+        // 添加定时器
+        [self addProgressTimer];
+        
+        self.showTimeLabel.hidden = YES;
+    }
 }
 
 #pragma mark  AVAuidoPlayer的代理方法
@@ -348,7 +388,11 @@
     
     self.lyricsView.hidden = !self.lyricsView.hidden;
     
-    
-    
+    if(self.lyricsView.hidden){
+        [self removeLrcTimer];
+    }else{
+        [self addLrcTimer];
+    }
 }
+
 @end

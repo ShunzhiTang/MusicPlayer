@@ -160,8 +160,6 @@
                 
                 //滚动单行
                 [self.tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                
-               NSLog(@"%@---%@---%@", currentTimeStr, LycrLine.time, nextLrcLine.time);
             }
             
         }

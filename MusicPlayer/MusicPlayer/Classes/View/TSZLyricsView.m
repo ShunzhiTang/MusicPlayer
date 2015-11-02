@@ -11,7 +11,7 @@
 #import "TSZLyricsLine.h"
 @interface TSZLyricsView () <UITableViewDataSource , UITableViewDelegate>
 @property (nonatomic , weak) UITableView *tableView;
-@property (nonatomic , weak)NSArray *lrcLines;
+@property (nonatomic , strong)NSArray *lrcLines;
 
 @property (nonatomic , assign) NSInteger currentIndex;
 
@@ -53,8 +53,6 @@
     
     self.tableView.frame = self.bounds;
     self.tableView.contentInset = UIEdgeInsetsMake(self.tableView.height * 0.5, 0, self.tableView.height * 0.5, 0);
-    NSLog(@"layoutSubviews");
-    NSLog(@"%@", NSStringFromCGRect(self.bounds));
 }
 
 #pragma mark 实现tableView的 数据源方法
@@ -71,6 +69,14 @@
     
     //2、给cell设置数据
     cell.lyriceLine= self.lrcLines[indexPath.row];
+    
+    
+    if (indexPath.row == self.currentIndex) {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0];
+    } else {
+        cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+    }
+    
     return  cell;
 }
 
@@ -100,7 +106,7 @@
         NSArray *lrcLineStringParts = [lrcStr componentsSeparatedByString:@"]"];
         TSZLyricsLine *lyrics = [[TSZLyricsLine alloc] init];
         lyrics.text = [lrcLineStringParts lastObject];
-        lyrics.text = [[lrcLineStringParts firstObject]  substringFromIndex:1];
+        lyrics.time = [[lrcLineStringParts firstObject]  substringFromIndex:1];
         
         //将模型对象添加到数组
         [temp addObject:lyrics];
@@ -119,8 +125,48 @@
         self.currentIndex = -1;
     }
     
-    //保存 当前的时间
+    //1、保存 当前的时间
     _currentTime = currentTime;
+    
+    //2、将传入的时间 转换 字符串
+    NSInteger minute = currentTime / 60;
+    NSInteger second = (NSInteger) currentTime % 60;
+     NSInteger millisecond = (currentTime - (NSInteger)currentTime) * 100;
+    NSString *currentTimeStr = [NSString stringWithFormat:@"%02ld:%02ld.%02ld", minute, second, millisecond];
+    
+    //3、对比时间
+    NSInteger count = self.lrcLines.count;
+    for (NSInteger i = self.currentIndex +1; i< count; i++) {
+        
+        //1、取出当前模型
+        TSZLyricsLine *LycrLine = self.lrcLines[i];
+        
+        //2、取出下一个歌词模型
+        NSInteger nextIndex = i + 1;
+        if (nextIndex < count) {
+            TSZLyricsLine *nextLrcLine = self.lrcLines[nextIndex];
+            
+            //3、比较时间
+            if ([currentTimeStr compare:LycrLine.time] != NSOrderedAscending  && [currentTimeStr compare:nextLrcLine.time] != NSOrderedDescending && self.currentIndex != i) {
+                //当前的索引
+                NSIndexPath *currentIndexPath = [NSIndexPath indexPathForRow:self.currentIndex inSection:0];
+                
+                //下一个索引
+                NSIndexPath *nextIndexPath = [NSIndexPath indexPathForRow:i inSection:0];
+                //shezhi
+                self.currentIndex   = i;
+                
+                [self.tableView reloadRowsAtIndexPaths:@[currentIndexPath , nextIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+                
+                //滚动单行
+                [self.tableView scrollToRowAtIndexPath:nextIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                
+               NSLog(@"%@---%@---%@", currentTimeStr, LycrLine.time, nextLrcLine.time);
+            }
+            
+        }
+        
+    }
     
 }
 

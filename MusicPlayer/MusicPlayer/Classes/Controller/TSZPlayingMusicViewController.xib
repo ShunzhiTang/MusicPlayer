@@ -26,10 +26,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play_cover_pic_bg" translatesAutoresizingMaskIntoConstraints="NO" id="5gs-FH-aXO" userLabel="背景图片">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="440"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOV-eG-WuQ" userLabel="歌词的view">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="440"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftD-Jx-fes" userLabel="退出按钮">
                     <rect key="frame" x="20" y="20" width="41" height="48"/>
                     <constraints>
@@ -192,22 +188,26 @@
                         </mask>
                     </variation>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOV-eG-WuQ" userLabel="歌词的view" customClass="TSZLyricsView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="440"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="5gs-FH-aXO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0jS-F9-I7Q"/>
                 <constraint firstAttribute="bottom" secondItem="EIG-kx-TBk" secondAttribute="bottom" id="4KL-kN-Fpo"/>
                 <constraint firstItem="EIG-kx-TBk" firstAttribute="top" secondItem="5gs-FH-aXO" secondAttribute="bottom" id="7Ws-Do-680"/>
+                <constraint firstAttribute="trailing" secondItem="fOV-eG-WuQ" secondAttribute="trailing" id="8Bd-x2-3L8"/>
                 <constraint firstItem="5gs-FH-aXO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DEz-Kl-e3L"/>
-                <constraint firstAttribute="trailing" secondItem="fOV-eG-WuQ" secondAttribute="trailing" id="HHu-fe-w2q"/>
                 <constraint firstItem="ftD-Jx-fes" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="PRr-g2-GkD"/>
+                <constraint firstItem="fOV-eG-WuQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Tdp-Vh-w4H"/>
                 <constraint firstItem="ftD-Jx-fes" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="c9q-b9-c77"/>
                 <constraint firstAttribute="trailing" secondItem="EIG-kx-TBk" secondAttribute="trailing" id="epg-Oq-izh"/>
-                <constraint firstItem="fOV-eG-WuQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="evH-mw-88p"/>
                 <constraint firstItem="EIG-kx-TBk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mV8-Cc-PbH"/>
                 <constraint firstItem="pQA-WG-on2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="mmK-Vt-uk6"/>
                 <constraint firstAttribute="trailing" secondItem="EIG-kx-TBk" secondAttribute="trailing" constant="302" id="npP-mX-W9P"/>
-                <constraint firstItem="EIG-kx-TBk" firstAttribute="top" secondItem="fOV-eG-WuQ" secondAttribute="bottom" id="p2f-jy-qds"/>
-                <constraint firstItem="fOV-eG-WuQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="r1L-xE-DBi"/>
+                <constraint firstItem="fOV-eG-WuQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pWj-eg-VpB"/>
+                <constraint firstItem="EIG-kx-TBk" firstAttribute="top" secondItem="fOV-eG-WuQ" secondAttribute="bottom" id="vYW-BN-CrQ"/>
                 <constraint firstAttribute="trailing" secondItem="5gs-FH-aXO" secondAttribute="trailing" id="yEk-sO-NsI"/>
                 <constraint firstAttribute="trailing" secondItem="pQA-WG-on2" secondAttribute="trailing" constant="20" id="yHi-jq-nft"/>
             </constraints>
@@ -216,7 +216,7 @@
                     <exclude reference="npP-mX-W9P"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="425" y="297"/>
+            <point key="canvasLocation" x="322" y="74"/>
         </view>
         <tapGestureRecognizer id="kf4-f4-lri">
             <connections>

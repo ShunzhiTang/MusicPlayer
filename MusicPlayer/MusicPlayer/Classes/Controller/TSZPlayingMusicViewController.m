@@ -11,7 +11,7 @@
 #import "TSZMusicTool.h"
 #import <AVFoundation/AVFoundation.h>
 #import "TSZAudioTool.h"
-
+#import "TSZLyricsView.h"
 
 @interface TSZPlayingMusicViewController ()<AVAudioPlayerDelegate>
 
@@ -23,6 +23,9 @@
 
 //进度的定时器
 @property (nonatomic ,strong)NSTimer  *progressTimer;
+
+//歌词的定时器
+@property (nonatomic ,strong)CADisplayLink *lrcTimer;
 
 //进度条滑动
 - (IBAction)tapProgressBackground:(UITapGestureRecognizer *)sender;
@@ -52,7 +55,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *playOrPauseButton;
 
 // 歌词的  view
-@property (weak, nonatomic) IBOutlet UIView *lyricsView;
+@property (weak, nonatomic) IBOutlet TSZLyricsView *lyricsView;
 
 //点击显示歌词
 
@@ -129,10 +132,10 @@
     
     self.singerIcon.image = [UIImage imageNamed:playingMusic.icon];
     
-
+    self.lyricsView.lrcname = playingMusic.lrcname;
     //3、播放音乐
-    
     self.player = [TSZAudioTool playMusicWithName:playingMusic.filename];
+    
     //秒数 duration 播放器
     self.totalTimeLabel.text = [self stringWithTime:self.player.duration];
     //遵守代理
@@ -142,6 +145,10 @@
     //4、添加定时器
     [self addProgressTimer];
     [self updateInfo];
+    
+    [self addLrcTimer];
+    [self updateLrcTime];
+    
     //5、改变按钮的状态
     self.playOrPauseButton.selected = NO;
 }
@@ -162,6 +169,32 @@
     [self.progressTimer invalidate];
     self.progressTimer = nil;
 }
+
+#pragma mark 添加歌词的定时器
+-(void)addLrcTimer{
+    
+    if (self.lyricsView.hidden) {
+        return;
+    }
+    
+    self.lrcTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateLrcTime)];
+    [self.lrcTimer addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    [self updateLrcTime];
+    
+}
+//移除歌词的定时器
+- (void)removeLrcTimer{
+    [self.lrcTimer invalidate];
+    
+    self.lrcTimer = nil;
+}
+
+#pragma mark 更新歌词
+- (void)updateLrcTime{
+    self.lyricsView.currentTime = self.player.currentTime;
+    //更新歌词
+}
+
 
 #pragma mark 更新进度条
 
@@ -186,6 +219,10 @@
     
     //停止播放音乐
     [TSZAudioTool stopMusicWithName:self.playingMusic.filename];
+    
+    //3、移除定时器
+    [self removeLrcTimer];
+    [self removeProgressTimer];
 }
 
 //退出音乐播放
@@ -204,6 +241,7 @@
         
         //移除定时器
         [self removeProgressTimer];
+        [self removeLrcTimer];
     }];
 }
 
@@ -307,6 +345,8 @@
 
 - (IBAction)lyricsClickButton:(UIButton *)sender {
     sender.selected = !sender.selected;
+    
+    self.lyricsView.hidden = !self.lyricsView.hidden;
     
     
     

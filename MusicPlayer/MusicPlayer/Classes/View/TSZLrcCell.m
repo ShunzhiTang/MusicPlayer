@@ -44,5 +44,4 @@
     self.textLabel.text = lyriceLine.text;
 }
 
-
 @end
